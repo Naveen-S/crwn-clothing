@@ -12,6 +12,47 @@ const config = {
     appId: "1:774517376696:web:97fd851a519dd4bae3d64d",
     measurementId: "G-71ZW5H6P8W"
 };
+
+/* 
+    Function responsible for taking the userAuth, from that extracting the user reference.
+    And if user exist just return the user reference, if not create user in DB using userRef.set().
+*/
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+    if(!userAuth) {
+        return;
+    }  
+    // Get user from firestore
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+    // userRef always returns a document call .get() to get the snapshot which has .exists to tell whether user is in db or not.
+    const snapshot = await userRef.get();
+    // If user is not in db.
+    if(!snapshot.exists) {
+        const {displayName, email} = userAuth;
+        const createdAt = new Date();
+        let obj = {
+            displayName,
+            email,
+            createdAt,
+            ...additionalData
+        };
+        console.log('obj ', obj);
+        
+        if(!obj.displayName) {
+            console.log("Don't add to DB display name is empty!");
+            return;
+        }
+
+        try {
+            // Create a row for him.
+            await userRef.set(obj)
+        } catch(error) {
+            console.log('error creating user ', error.message);
+        }
+    }
+    return userRef;
+}
+
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
