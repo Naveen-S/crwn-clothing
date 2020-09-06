@@ -1,20 +1,15 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
+import {connect} from 'react-redux';
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import SignInSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import Header from './components/header/header.component';
 import {auth, createUserProfileDocument} from './firebase/firebase.util';
+import { userAction } from './actions/user_actions';
 import './App.css';
 
 class App extends  Component {
-  constructor(props) {
-    super(props)
-  
-    this.state = {
-        currentUser: null  
-    }
-  }
 
   unsubscribeFromAuth = null;
   
@@ -36,12 +31,14 @@ class App extends  Component {
         // OnSnapShot will you the document(i.e. that row) without data. 
         // For user's data call snapShot.data()
         userRef.onSnapshot(snapShot => {
-            this.setState({
-              currentUser: { id: snapShot.id, ...snapShot.data()}
-            })
+            // this.setState({
+            //   currentUser: { id: snapShot.id, ...snapShot.data()}
+            // })
+            this.props.userAction({ id: snapShot.id, ...snapShot.data()});
         })
       } else {
-        this.setState({currentUser: userAuth});
+        // this.setState({currentUser: userAuth});
+        this.props.userAction(userAuth);
       }
 
     })
@@ -54,7 +51,7 @@ class App extends  Component {
   render() {
     return (
       <div>
-        <Header currentUser={this.state.currentUser}/>
+        <Header />
         <Route exact path='/' component={HomePage} />
         <Route exact path='/shop' component={ShopPage} />
         <Route exact path='/signin' component={SignInSignUpPage} />
@@ -64,4 +61,8 @@ class App extends  Component {
   
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {userAction: user => { dispatch(userAction(user))}};
+}
+
+export default connect(null, mapDispatchToProps)(App);
