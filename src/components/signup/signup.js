@@ -36,7 +36,8 @@ export default class signup extends Component {
             password: "",
             confirmPassword: ""
           }, () => {
-              this.props.history.push('/');
+              // Handled through Redirect in App.js 
+              // this.props.history.push('/');
           });
         });
       } catch (err) {

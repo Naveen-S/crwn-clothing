@@ -20,12 +20,13 @@ export default class SignIn extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const {email, password} = this.state;
+        const { email, password } = this.state;
         console.log('Hndle submit called');
         try {
-            auth.signInWithEmailAndPassword(email, password).then(usercred => {
+            auth.signInWithEmailAndPassword(email, password).then( usercred => {
                 this.setState({ email: '', password: '' }, () => {
-                    this.props.history.push('/');
+                    // Handle using Redirect in App.js
+                    // this.props.history.push('/');
                 });
             })
         } catch (e) {
