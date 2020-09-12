@@ -5,7 +5,7 @@ export default function cartItem({ name, imageUrl, price, quantity }) {
     return (
         <div className="cart-item">
             <div className="image-container">
-                <img className="image" src={`${imageUrl}`} alt="image" />
+                <img className="image" src={`${imageUrl}`} alt="someimage" />
             </div>
             <div className="other-details">
                 <h3>{name}</h3>

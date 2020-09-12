@@ -1,9 +1,24 @@
-import { TOGGLE_CART, ADD_TO_CART, REMOVE_FROM_CART } from '../actions/types';
-import { addItemToCart, getItemCount } from './cart_utils';
+import { TOGGLE_CART, ADD_TO_CART, REMOVE_FROM_CART,DECREASE_FROM_CART } from '../actions/types';
+import { addItemToCart, decreaseFromCart } from './cart_utils';
 
 const INITIAL_STATE = {
     open: false,
-    cartItems: [],
+    cartItems: [
+        {
+            id: 3,
+            name: 'Brown Cowboy',
+            imageUrl: 'https://i.ibb.co/QdJwgmp/brown-cowboy.png',
+            price: 35,
+            quantity: 3
+          },
+          {
+            id: 4,
+            name: 'Grey Brim',
+            imageUrl: 'https://i.ibb.co/RjBLWxB/grey-brim.png',
+            price: 25,
+            quantity: 3
+          }
+    ],
     // itemCount: 0 // Implementing this using reselect
 }
 
@@ -26,12 +41,19 @@ const cartReducer = (state = INITIAL_STATE, action) => {
 
         case REMOVE_FROM_CART: {
             let newCartItems = state.cartItems.filter((item) => {
-                return item === action.payload;
+                return item.id !== action.payload.id;
             })
             return {
                 ...state,
                 cartItems: newCartItems,
                 // itemCount: state.itemCount - 1
+            }
+        }
+
+        case DECREASE_FROM_CART: {
+            return {
+                ...state,
+                cartItems: decreaseFromCart(state.cartItems, action.payload)
             }
         }
 

@@ -1,4 +1,4 @@
-import { TOGGLE_CART, ADD_TO_CART, REMOVE_FROM_CART } from './types';
+import { TOGGLE_CART, ADD_TO_CART, REMOVE_FROM_CART, DECREASE_FROM_CART } from './types';
 
 export const toggleCart = () => {
     return {
@@ -16,6 +16,13 @@ export const addToCart = (item) => {
 export const removeFromCart = (item) => {
     return {
         type: REMOVE_FROM_CART,
+        payload: item
+    }
+}
+
+export const decreaseFromCart = (item) => {
+    return {
+        type: DECREASE_FROM_CART,
         payload: item
     }
 }

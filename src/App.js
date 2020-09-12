@@ -5,6 +5,7 @@ import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import SignInSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import Header from './components/header/header.component';
+import CheckOut from './pages/checkout/checkout';
 import {auth, createUserProfileDocument} from './firebase/firebase.util';
 import { userAction } from './actions/user_actions';
 import './App.css';
@@ -58,7 +59,7 @@ class App extends  Component {
         <Route exact path='/signin' render={() => {
           return this.props.currentUser ? <Redirect to="/" /> : <SignInSignUpPage />
         }} />
-
+        <Route exact path='/checkout' component={CheckOut}/>
       </div>
     );
   }
