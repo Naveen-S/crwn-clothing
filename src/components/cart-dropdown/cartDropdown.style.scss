@@ -1,6 +1,6 @@
 .cart-dropdown {
-    height: 300px;
-    width: 200px;
+    height: 400px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -10,6 +10,13 @@
     top: 90px;
     right: 60px;
     z-index: 6;
-    padding: 10px 0;
     background-color: #fff;
+    overflow: scroll;
+    padding: 20px;
+
+    .btn-container {
+        margin: 10px 0;
+        padding-bottom: 20px;
+        width: 100%;
+    }
 }

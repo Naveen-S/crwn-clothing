@@ -13,7 +13,7 @@ export default function CollectionPreview({title, items}) {
                     .filter((item, idx) => idx < 4)
                     .map(item => {
                         return (
-                            <CollectionItem key={item.id} {...item} />
+                            <CollectionItem key={item.id} item={item}  />
                             );
                     })
                 }

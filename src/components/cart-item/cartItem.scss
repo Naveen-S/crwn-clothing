@@ -1,0 +1,25 @@
+.cart-item {
+    display: flex;
+    width: 100%;
+    padding: 10px 0;
+    align-items: center;
+    column-gap: 15%;
+    
+    .image {
+        width: 100px;
+        height: 120px;
+    }
+
+    h3 {
+        padding: 0;
+        margin: 0;
+    }
+
+    .image-container {
+        display: flex;
+    }
+    .other-details {
+        display: flex;
+        flex-direction: column;
+    }   
+}
