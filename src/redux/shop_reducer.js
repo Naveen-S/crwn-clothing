@@ -1,3 +1,5 @@
+import { UPDATE_SHOP_DATA } from "../actions/types";
+
 const INITIAL_STATE = {
     hats: {
       id: 1,
@@ -247,8 +249,15 @@ const INITIAL_STATE = {
 };
 
 
-  const shop_reducer = (state = INITIAL_STATE, action) => {
+  const shop_reducer = (state = {}, action) => {
       switch(action.type) {
+          case(UPDATE_SHOP_DATA) : {
+            console.log("in update shop");
+              return {
+                ...action.payload
+              }
+          }
+
           default: {
               return state;
           }

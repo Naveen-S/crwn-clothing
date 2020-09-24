@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from 'react-redux';
 import CollectionPreview from "../../components/collection-preview/collection-preview.component";
 import {collectionSelector} from '../../redux/selectors/shopSelector';
-
+import WithLoader from '../../components/withLoader/withLoader';
 function CollectionOverview({shop}) {
   return (
     <div>
@@ -12,6 +12,7 @@ function CollectionOverview({shop}) {
             key={collection.id}
             title={collection.title}
             items={collection.items}
+            routeName = {collection.routeName}
           />
         );
       })}
@@ -22,4 +23,4 @@ function CollectionOverview({shop}) {
 const mapStateToProps = (state) => {
     return {shop: collectionSelector(state)};
 }
-export default connect(mapStateToProps)(CollectionOverview);
+export default WithLoader(connect(mapStateToProps)(CollectionOverview), false);
