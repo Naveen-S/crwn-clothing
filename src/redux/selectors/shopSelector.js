@@ -4,13 +4,18 @@ import { createSelector } from "reselect";
 const shopSelector = state => state.shop;
 
 // Dummy selector
-export const dummySelector = createSelector(shopSelector, shop => shop);
+export const selectCollections = createSelector(shopSelector, shop => shop.collection);
 
-export const collectionSelector = createSelector(shopSelector, (shop) => {
+export const collectionSelector = createSelector(selectCollections, (shop) => {
+    console.log(shop);
     return _.values(shop);
 })
-export const getCategoryItem = (categoryName) => {
-    createSelector(dummySelector, (shopItems) => {
-        shopItems.find(item =>  item.routeName === categoryName)
-    })
-}
+
+// Couldn't wrap my head around it
+// export const selectCollection = createSelector(
+//   selectCollections,
+//   (shopItems, categoryName) => {
+//       console.log(categoryName);
+//     return shopItems[categoryName];
+//   }
+// );

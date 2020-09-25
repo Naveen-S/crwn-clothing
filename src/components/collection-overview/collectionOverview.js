@@ -23,4 +23,4 @@ function CollectionOverview({shop}) {
 const mapStateToProps = (state) => {
     return {shop: collectionSelector(state)};
 }
-export default WithLoader(connect(mapStateToProps)(CollectionOverview), false);
+export default connect(mapStateToProps)(CollectionOverview);
